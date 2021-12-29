@@ -129,15 +129,15 @@ func BenchmarkCount(b *testing.B) {
 
 #### Результат бенчмарку:
 
-![sa-4_benchmark_results](./sa-4/benchmarks_lab_4.png)
+![sa-4_benchmark_results](./sa-4/benchmark_result.png)
 
 #### Графік:
 
-![sa-4_graph](./sa-4/graph_lab_4.png)
+![sa-4_graph](./sa-4/graph.png)
 
 #### Діаграмма взаємодії:
 
-![sa-4_communication_diagram](./sa-4/communication_diagram_lab_4.png)
+![sa-4_communication_diagram](./sa-4/communication_diagram.png)
 
 На першому та другому кроці програма зчитує команди з файлу та парсить рядок за рядком. Отримані команди передаються 
 у чергу повідомлень. Тим часом `EventLoop` дістає ці команди з черги та виконує їх. Результатом виконання команд є вивід
