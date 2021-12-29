@@ -95,3 +95,50 @@ func BenchmarkCalculatePostfix(b *testing.B) {
 
 У ролі клієнта виступає `http-запит` по будь-якому з двох доступних роутів: `Get: /machines` або `Patch: /disks/:diskId`.
 Контроллер (`ServeAllMachines`, `ConnectToMachine`) відповідає за обробку http-запиту, викликає методи сервісу (`ReadAll`, `ConnectToMachine`), який в свою чергу викликає або методи репозиторію (`GetAll,` `Update`) або методи інших сервісів (сервіс `disksService` викликає метод `Update` сервісу `machinesService`). Методи репозиторію виконують `SQL-запити` до бази даних за допомогою прослойки з інтерфейсу бази даних. У результаті запиту база даних оновлюється і повертаються потрібні дані, які піднімаючись в зворотньому напрямку по схемі віддаются контроллером у вигляді `http-response`.
+
+## Лабораторна 4
+
+#### Вихідний код бенчмарку:
+
+```go
+package parser
+
+import (
+	"testing"
+	"fmt"
+	
+	"github.com/multipleton/sa-4/engine"
+	"github.com/multipleton/sa-4/parser"
+)
+
+var cntRes engine.Command
+func BenchmarkCount(b *testing.B) {
+  const baseLen = 2000
+  line := "print line\n"
+  for i := 0; i < 14; i++ {
+    l := baseLen * (i + 1)
+    for k := 0; k < l; k++ {
+      line = line + "print line \nsplit a-b-c -\n"
+    }
+    b.Run(fmt.Sprintf("len=%d", l), func(b *testing.B) {
+      cntRes = parser.Parse(line)
+    })  
+  }
+}
+```
+
+#### Результат бенчмарку:
+
+![sa-4_benchmark_results](./sa-4/benchmarks_lab_4.png)
+
+#### Графік:
+
+![sa-4_graph](./sa-4/graph_lab_4.png)
+
+#### Діаграмма взаємодії:
+
+![sa-4_communication_diagram](./sa-4/communication_diagram_lab_4.png)
+
+На першому та другому кроці програма зчитує команди з файлу та парсить рядок за рядком. Отримані команди передаються 
+у чергу повідомлень. Тим часом `EventLoop` дістає ці команди з черги та виконує їх. Результатом виконання команд є вивід
+текстових даних у консоль.
