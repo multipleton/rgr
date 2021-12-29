@@ -4,7 +4,7 @@ Software Architecture - Calculation Graphic Work
 
 ## Лабораторна 2
 
-### Вихідний код бенчмарку
+#### Вихідний код бенчмарку:
 
 ```go
 package lab2
@@ -76,17 +76,17 @@ func BenchmarkCalculatePostfix(b *testing.B) {
 }
 ```
 
-### Результат бенчмарку
+#### Результат бенчмарку:
 
 ![sa-2_benchmark_result](./sa-2/benchmark_result.png)
 
-### Графік
+#### Графік:
 
 ![sa-2_graph](./sa-2/graph.png)
 
 ## Лабораторна 3
 
-Діаграмма взаємодії:
+#### Діаграмма взаємодії:
 
 ![sa-3_communication_diagram](./sa-3/communication_diagram.png)
 
